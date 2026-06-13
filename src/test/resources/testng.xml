@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Enterprise Automation Suite">
+    
+    <listeners>
+        <listener class-name="listeners.TestListener"/>
+        <listener class-name="listeners.AnnotationTransformer"/>
+    </listeners>
+    
+    <test name="Complete DOM Coverage Test">
+        <classes>
+            <class name="tests.CoreFeaturesTest"/>
+            <class name="tests.AdvancedFeaturesTest"/>
+        </classes>
+    </test>
+    
+</suite>
