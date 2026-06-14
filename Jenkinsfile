@@ -9,19 +9,35 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Gautamkr26/Wipro-Capstone-Project-Gautam-Kumar.git'
+                git branch: 'main',
+                url: 'https://github.com/Gautamkr26/Wipro-Capstone-Project-Gautam-Kumar.git'
             }
         }
 
-        stage('Build & Test') {
+        stage('Build') {
             steps {
-                bat 'mvn clean test'
+                bat 'mvn clean'
+            }
+        }
+
+        stage('Execute Tests') {
+            steps {
+                bat 'mvn test'
+            }
+        }
+
+        stage('Publish Reports') {
+            steps {
+                echo 'Publishing Reports...'
             }
         }
     }
 
     post {
         always {
+
+            junit 'target/surefire-reports/*.xml'
+
             publishHTML([
                 allowMissing: true,
                 alwaysLinkToLastBuild: true,
