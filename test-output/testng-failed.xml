@@ -9,12 +9,12 @@
     <classes>
       <class name="tests.AdvancedFeaturesTest">
         <methods>
+          <include name="scrollingDropdownTest"/>
           <include name="tearDownClass"/>
-          <include name="sliderTest"/>
           <include name="init"/>
-          <include name="svgTest"/>
           <include name="cleanState"/>
           <include name="setUpClass"/>
+          <include name="iframeTest"/>
         </methods>
       </class> <!-- tests.AdvancedFeaturesTest -->
     </classes>

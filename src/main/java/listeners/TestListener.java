@@ -22,7 +22,8 @@ public class TestListener implements ITestListener {
     
     @Override
     public void onTestSuccess(ITestResult res) { 
-        test.get().log(Status.PASS, "Test Passed"); 
+        test.get().log(Status.PASS, "Test Passed");
+        test.get().addScreenCaptureFromBase64String(ScreenshotUtils.getBase64(), "Pass Screenshot"); 
     }
     
     @Override

@@ -1,14 +1,38 @@
 pipeline {
     agent any
-    tools { maven 'Maven 3.8'; jdk 'Java 17' }
-    stages {
-        stage('Checkout') { steps { checkout scm } }
-        stage('Execute Fast CI/CD Mode') { steps { sh 'mvn clean test -Dbrowser=chrome -Dheadless=true -P fast' } }
+
+    tools {
+        // Ensure you have configured 'Maven3' in Jenkins Global Tool Configuration
+        maven 'Maven3'
     }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Replace with your actual repository URL
+                git branch: 'main', url: 'https://github.com/your-username/GUIAutomationFramework.git'
+            }
+        }
+
+        stage('Build & Test') {
+            steps {
+                // Executes all tests defined in your pom.xml
+                sh 'mvn clean test'
+            }
+        }
+    }
+
     post {
         always {
-            archiveArtifacts artifacts: 'logs/*.log, reports/*.html', allowEmptyArchive: true
-            publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'reports', reportFiles: 'AutomationReport.html', reportName: 'Extent Report'])
+            // Publishes the Extent Report to the Jenkins Dashboard
+            publishHTML([
+                allowMissing: false, 
+                alwaysLinkToLastBuild: true, 
+                keepAll: true, 
+                reportDir: 'reports', 
+                reportFiles: 'AutomationReport.html', 
+                reportName: 'Extent Report'
+            ])
         }
     }
 }

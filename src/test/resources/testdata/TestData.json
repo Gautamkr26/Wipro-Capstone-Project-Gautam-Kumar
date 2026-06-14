@@ -1,8 +1,6 @@
-[
-  {
-    "name": "Gautam Kumar",
-    "email": "gautamkumar@gmail.com",
-    "phone": "7488942855",
-    "address": "Darbhanga, Bihar, India"
-  }
-]
+{
+  "userName": "Gautam Kumar",
+  "userEmail": "gk@test.com",
+  "userPhone": "9800000000",
+  "userAddress": "Tech Park, Bangalore"
+}
