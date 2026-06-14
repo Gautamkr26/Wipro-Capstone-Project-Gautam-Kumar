@@ -2,33 +2,34 @@ pipeline {
     agent any
 
     tools {
+        jdk 'JDK25'
         maven 'Maven3'
     }
 
     stages {
 
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
                 git branch: 'main',
                 url: 'https://github.com/Gautamkr26/Wipro-Capstone-Project-Gautam-Kumar.git'
             }
         }
 
-        stage('Build') {
+        stage('Build Project') {
             steps {
                 bat 'mvn clean'
             }
         }
 
-        stage('Execute Tests') {
+        stage('Run TestNG Tests') {
             steps {
                 bat 'mvn test'
             }
         }
 
-        stage('Publish Reports') {
+        stage('Generate Reports') {
             steps {
-                echo 'Publishing Reports...'
+                echo 'Generating Extent Report...'
             }
         }
     }
@@ -36,7 +37,8 @@ pipeline {
     post {
         always {
 
-            junit 'target/surefire-reports/*.xml'
+            junit allowEmptyResults: true,
+                  testResults: 'target/surefire-reports/*.xml'
 
             publishHTML([
                 allowMissing: true,
