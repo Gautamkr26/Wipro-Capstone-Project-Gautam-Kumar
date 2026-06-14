@@ -2,35 +2,32 @@ pipeline {
     agent any
 
     tools {
-        // Ensure you have configured 'Maven3' in Jenkins Global Tool Configuration
         maven 'Maven3'
     }
 
     stages {
+
         stage('Checkout') {
             steps {
-                // Replace with your actual repository URL
-                git branch: 'main', url: 'https://github.com/your-username/GUIAutomationFramework.git'
+                git branch: 'main', url: 'https://github.com/Gautamkr26/Wipro-Capstone-Project-Gautam-Kumar.git'
             }
         }
 
         stage('Build & Test') {
             steps {
-                // Executes all tests defined in your pom.xml
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
         }
     }
 
     post {
         always {
-            // Publishes the Extent Report to the Jenkins Dashboard
             publishHTML([
-                allowMissing: false, 
-                alwaysLinkToLastBuild: true, 
-                keepAll: true, 
-                reportDir: 'reports', 
-                reportFiles: 'AutomationReport.html', 
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'reports',
+                reportFiles: 'AutomationReport.html',
                 reportName: 'Extent Report'
             ])
         }
